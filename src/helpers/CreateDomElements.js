@@ -1,5 +1,4 @@
 export const DomModule = (() => {
-
   const addHtmlNav = (classArray, id = null) => {
     const newNav = document.createElement('nav');
     for (let i = 0; i < classArray.length; i += 1) {

@@ -1,7 +1,6 @@
 import { DomModule } from '../../helpers/CreateDomElements';
 
 export const cardContainer = (() => {
-
   const drawLocationText = () => {
     const html = DomModule.addHtmlH2('Estados Unidos, PE');
     return html;
@@ -14,16 +13,24 @@ export const cardContainer = (() => {
   };
 
   const drawCard = () => {
+    const cardWrapper = DomModule.addHtmlDiv(['card-wrapper']);
     const divForm = DomModule.addHtmlDiv(['photo']);
     divForm.appendChild(drawCardImage());
     divForm.appendChild(drawLocationText());
-    return divForm;
+    cardWrapper.appendChild(divForm);
+    return cardWrapper;
   };
 
   const drawCardContainer = () => {
-    const cardWrapper = DomModule.addHtmlDiv(['card-wrapper']);
-    cardWrapper.append(drawCard());
-    return cardWrapper;
+    const arrayClass = ['d-flex',
+      'flex-wrap',
+      'justify-content-center',
+      'wrapper-cards',
+      'pt-4'];
+
+    const wrapperCards = DomModule.addHtmlDiv(arrayClass);
+    wrapperCards.append(drawCard());
+    return wrapperCards;
   };
 
 
