@@ -1,11 +1,12 @@
 import { createNavBar } from './navbar/topnavbar';
-import { cardContainer } from './cards/cardContainer';
+import { cardModule } from './cards/cardModule';
 
 export const configurePage = (() => {
   const configureHome = () => {
     const homeContainer = document.querySelector('#main-container');
     homeContainer.appendChild(createNavBar.drawNavBar());
-    homeContainer.appendChild(cardContainer.drawCardContainer());
+
+    cardModule.parseDataWeather('Cusco', 'PE');
     return homeContainer;
   };
 

@@ -17,6 +17,24 @@ export const DomModule = (() => {
     return newDiv;
   };
 
+  const addHtmlUl = (classArray, id = null) => {
+    const element = document.createElement('ul');
+    for (let i = 0; i < classArray.length; i += 1) {
+      element.classList.add(classArray[i]);
+    }
+    if (id != null) element.id = id;
+    return element;
+  };
+
+  const addHtmlLi = (classArray, id = null) => {
+    const element = document.createElement('li');
+    for (let i = 0; i < classArray.length; i += 1) {
+      element.classList.add(classArray[i]);
+    }
+    if (id != null) element.id = id;
+    return element;
+  };
+
   const addHtmlAnchor = (classArray, href, text, id) => {
     const newAnchor = document.createElement('a');
     for (let i = 0; i < classArray.length; i += 1) {
@@ -72,6 +90,49 @@ export const DomModule = (() => {
     }
     return element;
   };
+
+  const addHtmlH1 = (text, classArray = null) => {
+    const element = document.createElement('h1');
+    const content = document.createTextNode(text);
+    element.appendChild(content);
+    if (classArray != null) {
+      for (let i = 0; i < classArray.length; i += 1) {
+        element.classList.add(classArray[i]);
+      }
+    }
+    return element;
+  };
+
+  const addHtmlH6 = (text, classArray = null) => {
+    const element = document.createElement('h6');
+    const content = document.createTextNode(text);
+    element.appendChild(content);
+    if (classArray != null) {
+      for (let i = 0; i < classArray.length; i += 1) {
+        element.classList.add(classArray[i]);
+      }
+    }
+    return element;
+  };
+
+  const addHtmlp = (text, classArray = null) => {
+    const element = document.createElement('p');
+    const content = document.createTextNode(text);
+    element.appendChild(content);
+    if (classArray != null) {
+      for (let i = 0; i < classArray.length; i += 1) {
+        element.classList.add(classArray[i]);
+      }
+    }
+    return element;
+  };
+
+  const addHtmlSpan = (text) => {
+    const element = document.createElement('span');
+    const content = document.createTextNode(text);
+    element.appendChild(content);
+    return element;
+  };
   return {
     addHtmlDiv,
     addHtmlNav,
@@ -80,6 +141,12 @@ export const DomModule = (() => {
     addHtmlButton,
     addHtmlImg,
     addHtmlH2,
+    addHtmlSpan,
+    addHtmlH1,
+    addHtmlp,
+    addHtmlUl,
+    addHtmlLi,
+    addHtmlH6,
   };
 })();
 
