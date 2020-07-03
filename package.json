@@ -8,7 +8,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git@github.com:rubenpazch/js-weather-app.git"
+    "url": "git+ssh://git@github.com/rubenpazch/js-weather-app.git"
   },
   "author": "Ruben Paz",
   "license": "ISC",
@@ -32,5 +32,6 @@
   },
   "dependencies": {
     "node-sass": "^4.14.1"
-  }
+  },
+  "keywords": []
 }

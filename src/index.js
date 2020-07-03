@@ -1,15 +1,6 @@
-import './style.scss';
-import { ConfigurePage } from './helpers/configurePage';
-import { projectModule } from './project/projectModule';
-
-const keyStorage = 'todoList';
+import '../../style.css';
+import { configurePage } from './homepage/configurepage';
 
 window.onload = function initialActions() {
-  ConfigurePage.InitializePage(keyStorage);
+  configurePage.configureHome();
 };
-
-window.addEventListener('beforeunload', () => {
-  if (projectModule.getProjectAmount !== 0) {
-    projectModule.saveToStorage(keyStorage);
-  }
-});
