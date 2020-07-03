@@ -52,12 +52,35 @@ export const DomModule = (() => {
     return newButton;
   };
 
+  const addHtmlImg = (classArray, srcPath) => {
+    const img = new Image();
+    img.src = srcPath;
+
+    for (let i = 0; i < classArray.length; i += 1) {
+      img.classList.add(classArray[i]);
+    }
+    return img;
+  };
+
+  const addHtmlH2 = (text, classArray = null) => {
+    const element = document.createElement('h2');
+    const content = document.createTextNode(text);
+    element.appendChild(content);
+    if (classArray != null) {
+      for (let i = 0; i < classArray.length; i += 1) {
+        element.classList.add(classArray[i]);
+      }
+    }
+    return element;
+  };
   return {
     addHtmlDiv,
     addHtmlNav,
     addHtmlAnchor,
     addHtmlInput,
     addHtmlButton,
+    addHtmlImg,
+    addHtmlH2,
   };
 })();
 
