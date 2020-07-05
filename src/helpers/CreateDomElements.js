@@ -133,6 +133,17 @@ export const DomModule = (() => {
     element.appendChild(content);
     return element;
   };
+
+  const addHtmlLabel = (classArray, id = null, forAtt) => {
+    const newLabel = document.createElement('label');
+    for (let i = 0; i < classArray.length; i += 1) {
+      newLabel.classList.add(classArray[i]);
+    }
+    newLabel.setAttribute('for', forAtt);
+    if (id != null) newLabel.id = id;
+    return newLabel;
+  };
+
   return {
     addHtmlDiv,
     addHtmlNav,
@@ -147,6 +158,7 @@ export const DomModule = (() => {
     addHtmlUl,
     addHtmlLi,
     addHtmlH6,
+    addHtmlLabel,
   };
 })();
 

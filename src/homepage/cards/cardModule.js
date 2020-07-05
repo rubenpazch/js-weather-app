@@ -2,6 +2,8 @@ import { DomModule } from '../../helpers/CreateDomElements';
 import { cardFactory } from './cardFactory';
 
 export const cardModule = (() => {
+  let counter = 0;
+  const cardsArrays = [];
   const drawLocationText = (locationInfo) => {
     const html = DomModule.addHtmlH2(locationInfo);
     return html;
@@ -82,8 +84,9 @@ export const cardModule = (() => {
     return ulElement;
   };
 
-  const drawCard = (city, country, icon, description, temp, feelsLike, main) => {
-    const cardWrapper = DomModule.addHtmlDiv(['card-wrapper', 'mx-2']);
+  const drawCard = (id, city, country, icon, description, temp, feelsLike, main) => {
+    const cardWrapper = DomModule.addHtmlDiv(['card-wrapper', 'mx-2'], `idCardWrapper-${id}`);
+    cardsArrays.push(`idCardWrapper-${id}`);
     const divForm = DomModule.addHtmlDiv(['photo']);
     const divWeatherMain = DomModule.addHtmlDiv(['weather-main']);
     const spanWeatherStatus = DomModule.addHtmlSpan(main);
@@ -114,32 +117,33 @@ export const cardModule = (() => {
   };
 
   const getWeatherCity = async (city, country) => {
-    const pathAPI = `http://api.openweathermap.org/data/2.5/weather?q=${city},${country}&APPID=63ef30cbb14aca87dcfe79f9c0c8134a`;
+    const pathAPI = `http://api.openweathermap.org/data/2.5/weather?q=${city}&APPID=63ef30cbb14aca87dcfe79f9c0c8134a`;
     const response = await fetch(pathAPI, { mode: 'cors' });
     const weatherData = await response.json();
     return weatherData;
   };
-  const drawCardContainer = () => {
-    const arrayClass = ['d-flex',
-      'flex-wrap',
-      'justify-content-center',
-      'wrapper-cards',
-      'pt-4'];
 
-    const wrapperCards = DomModule.addHtmlDiv(arrayClass);
-    return wrapperCards;
+  const drawCardContainer = () => {
+    const wrapperCars = document.getElementById('idCardsWrapper');
+    if (wrapperCars.childNodes.length > 0 && wrapperCars.childNodes.length === 3) {
+      wrapperCars.childNodes[0].remove();
+    } else {
+      console.log('there is no elements');
+    }
+    return wrapperCars;
   };
 
   const parseDataWeather = (city, country) => {
     getWeatherCity(city, country).then(v => {
-      const card = drawCard(v.name,
+      counter += 1;
+      const card = drawCard(counter,
+        v.name,
         v.sys.country,
         v.weather[0].icon,
         v.weather[0].description,
         Math.round(v.main.temp),
         Math.round(v.main.feels_like),
         v.weather[0].main);
-
       const wrapper = drawCardContainer();
       wrapper.appendChild(card);
       const homeContainer = document.querySelector('#main-container');
