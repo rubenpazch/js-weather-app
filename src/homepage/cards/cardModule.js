@@ -93,6 +93,7 @@ export const cardModule = (() => {
     return spinnerContainer;
   };
 
+  // eslint-disable-next-line max-len
   const drawCard = (id, city, country, icon, description, temp, feelsLike, main, minTemp, maxTemp, pressure, humidity, visibility) => {
     const cardWrapper = DomModule.addHtmlDiv(['card-wrapper', 'mx-2'], `idCardWrapper-${id}`);
     cardsArrays.push([`idCardWrapper-${id}`, city]);

@@ -6,13 +6,17 @@ export const cardFactory = () => {
   let icon = '';
   let temp = 0;
   let feelsLike = 0;
-  const tempMin = 0;
-  const tempMax = 0;
+  let tempMin = 0;
+  let tempMax = 0;
   let pressure = 0;
   let humidity = 0;
-  const visibility = 0;
+  let visibility = 0;
   let cityName = '';
 
+  const getVisibility = () => visibility;
+  const setVisibility = pVisibility => {
+    visibility = pVisibility;
+  };
   const getLongitude = () => longitude;
   const setLongitude = pLongitude => {
     longitude = pLongitude;
@@ -53,6 +57,14 @@ export const cardFactory = () => {
   const setHumidity = pHumidity => {
     humidity = pHumidity;
   };
+  const getTempMin = () => tempMin;
+  const setTempMin = pTempMin => {
+    tempMin = pTempMin;
+  };
+  const getTempMax = () => tempMax;
+  const setTempMax = pTempMax => {
+    tempMax = pTempMax;
+  };
 
   return {
     getLongitude,
@@ -75,6 +87,12 @@ export const cardFactory = () => {
     setPressure,
     getHumidity,
     setHumidity,
+    getTempMin,
+    setTempMin,
+    getTempMax,
+    setTempMax,
+    getVisibility,
+    setVisibility,
   };
 };
 
