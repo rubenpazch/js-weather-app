@@ -46,7 +46,7 @@ export const DomModule = (() => {
     return newAnchor;
   };
 
-  const addHtmlInput = (classArray, type, placeHolder, id, text = '') => {
+  const addHtmlInput = (classArray, type, placeHolder = '', id, text = '') => {
     const newInput = document.createElement('input');
     for (let i = 0; i < classArray.length; i += 1) {
       newInput.classList.add(classArray[i]);
@@ -55,6 +55,17 @@ export const DomModule = (() => {
     newInput.setAttribute('type', type);
     newInput.setAttribute('placeholder', placeHolder);
     newInput.value = text;
+    return newInput;
+  };
+
+  const addHtmlInputRadio = (classArray, type, id, name = '') => {
+    const newInput = document.createElement('input');
+    for (let i = 0; i < classArray.length; i += 1) {
+      newInput.classList.add(classArray[i]);
+    }
+    newInput.id = id;
+    newInput.setAttribute('type', type);
+    newInput.setAttribute('name', name);
     return newInput;
   };
 
@@ -134,13 +145,15 @@ export const DomModule = (() => {
     return element;
   };
 
-  const addHtmlLabel = (classArray, id = null, forAtt) => {
+  const addHtmlLabel = (classArray, id = null, forAtt, text) => {
     const newLabel = document.createElement('label');
     for (let i = 0; i < classArray.length; i += 1) {
       newLabel.classList.add(classArray[i]);
     }
     newLabel.setAttribute('for', forAtt);
+    const content = document.createTextNode(text);
     if (id != null) newLabel.id = id;
+    newLabel.appendChild(content);
     return newLabel;
   };
 
@@ -159,6 +172,7 @@ export const DomModule = (() => {
     addHtmlLi,
     addHtmlH6,
     addHtmlLabel,
+    addHtmlInputRadio,
   };
 })();
 

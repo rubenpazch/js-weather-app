@@ -74,17 +74,18 @@ export const cardModule = (() => {
     return liElement;
   };
 
-  const drawCardElements = () => {
+  const drawCardElements = (minTemp, maxTemp, pressure, humidity, visibility) => {
     const arrayUl = ['list-group', 'list-group-flush'];
     const ulElement = DomModule.addHtmlUl(arrayUl);
-    ulElement.appendChild(liElementTemp('98º', '150º'));
-    ulElement.appendChild(liElement('Pressure', '98º', 'compress-arrows-alt'));
-    ulElement.appendChild(liElement('Humidity', '98º', 'dewpoint'));
-    ulElement.appendChild(liElement('Visibility', '98º', 'eye'));
+    ulElement.appendChild(liElementTemp(`${minTemp} º`, `${maxTemp} º`));
+    ulElement.appendChild(liElement('Pressure', `${pressure} mb`, 'compress-arrows-alt'));
+    ulElement.appendChild(liElement('Humidity', `${humidity} %`, 'dewpoint'));
+    const visibilityParam = visibility === undefined ? '0 km' : `${visibility / 1000} km`;
+    ulElement.appendChild(liElement('Visibility', visibilityParam, 'eye'));
     return ulElement;
   };
 
-  const drawCard = (id, city, country, icon, description, temp, feelsLike, main) => {
+  const drawCard = (id, city, country, icon, description, temp, feelsLike, main, minTemp, maxTemp, pressure, humidity, visibility) => {
     const cardWrapper = DomModule.addHtmlDiv(['card-wrapper', 'mx-2'], `idCardWrapper-${id}`);
     cardsArrays.push(`idCardWrapper-${id}`);
     const divForm = DomModule.addHtmlDiv(['photo']);
@@ -112,7 +113,7 @@ export const cardModule = (() => {
     divForm.appendChild(divWeatherIcon);
 
     cardWrapper.appendChild(divForm);
-    cardWrapper.appendChild(drawCardElements());
+    cardWrapper.appendChild(drawCardElements(minTemp, maxTemp, pressure, humidity, visibility));
     return cardWrapper;
   };
 
@@ -143,7 +144,12 @@ export const cardModule = (() => {
         v.weather[0].description,
         Math.round(v.main.temp),
         Math.round(v.main.feels_like),
-        v.weather[0].main);
+        v.weather[0].main,
+        v.main.temp_min,
+        v.main.temp_max,
+        v.main.pressure,
+        v.main.humidity,
+        v.visibility);
       const wrapper = drawCardContainer();
       wrapper.appendChild(card);
       const homeContainer = document.querySelector('#main-container');
