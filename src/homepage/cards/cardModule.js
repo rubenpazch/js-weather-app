@@ -84,6 +84,15 @@ export const cardModule = (() => {
     return ulElement;
   };
 
+  const addSpinner = () => {
+    const spinnerContainer = DomModule.addHtmlDiv(['spinner-border'], 'idSpinnerProgress');
+    spinnerContainer.setAttribute('role', 'status');
+    const spanSpinner = DomModule.addHtmlSpan('Loading...');
+    spanSpinner.className = 'sr-only';
+    spinnerContainer.appendChild(spanSpinner);
+    return spinnerContainer;
+  };
+
   const drawCard = (id, city, country, icon, description, temp, feelsLike, main, minTemp, maxTemp, pressure, humidity, visibility) => {
     const cardWrapper = DomModule.addHtmlDiv(['card-wrapper', 'mx-2'], `idCardWrapper-${id}`);
     cardsArrays.push([`idCardWrapper-${id}`, city]);
@@ -132,8 +141,7 @@ export const cardModule = (() => {
     const wrapperCars = document.getElementById('idCardsWrapper');
     if (wrapperCars.childNodes.length > 0 && wrapperCars.childNodes.length === 3) {
       wrapperCars.childNodes[0].remove();
-    } else {
-      console.log('there is no elements');
+      cardsArrays.shift();
     }
     return wrapperCars;
   };
@@ -167,7 +175,6 @@ export const cardModule = (() => {
   };
 
   const changeWeatherMetric = () => {
-    console.log(cardsArrays);
     const lenItems = cardsArrays.length;
     const wrapperCars = document.getElementById('idCardsWrapper');
     if (lenItems === 1) {
@@ -184,39 +191,64 @@ export const cardModule = (() => {
       if (isFahrenheit() === false) {
         wrapperCars.childNodes[0].remove();
         wrapperCars.childNodes[0].remove();
-        parseDataWeather(cardsArrays[0][1], 'Metric');
-        parseDataWeather(cardsArrays[1][1], 'Metric');
-        cardsArrays.shift();
-        cardsArrays.shift();
+        setTimeout(() => {
+          parseDataWeather(cardsArrays[0][1], 'Metric');
+        }, 500);
+        setTimeout(() => {
+          parseDataWeather(cardsArrays[1][1], 'Metric');
+          cardsArrays.shift();
+          cardsArrays.shift();
+        }, 600);
       } else {
         wrapperCars.childNodes[0].remove();
         wrapperCars.childNodes[0].remove();
-        parseDataWeather(cardsArrays[0][1], 'Imperial');
-        parseDataWeather(cardsArrays[1][1], 'Imperial');
-        cardsArrays.shift();
-        cardsArrays.shift();
+        setTimeout(() => {
+          parseDataWeather(cardsArrays[0][1], 'Imperial');
+        }, 500);
+        setTimeout(() => {
+          parseDataWeather(cardsArrays[1][1], 'Imperial');
+          cardsArrays.shift();
+          cardsArrays.shift();
+        }, 600);
       }
     } else if (lenItems === 3) {
       if (isFahrenheit() === false) {
         wrapperCars.childNodes[0].remove();
         wrapperCars.childNodes[0].remove();
         wrapperCars.childNodes[0].remove();
-        parseDataWeather(cardsArrays[0][1], 'Metric');
-        parseDataWeather(cardsArrays[1][1], 'Metric');
-        parseDataWeather(cardsArrays[2][1], 'Metric');
-        cardsArrays.shift();
-        cardsArrays.shift();
-        cardsArrays.shift();
+
+        setTimeout(() => {
+          parseDataWeather(cardsArrays[0][1], 'Metric');
+        }, 500);
+
+        setTimeout(() => {
+          parseDataWeather(cardsArrays[1][1], 'Metric');
+        }, 600);
+        setTimeout(() => {
+          parseDataWeather(cardsArrays[2][1], 'Metric');
+          cardsArrays.shift();
+          cardsArrays.shift();
+          cardsArrays.shift();
+        }, 700);
       } else {
         wrapperCars.childNodes[0].remove();
         wrapperCars.childNodes[0].remove();
         wrapperCars.childNodes[0].remove();
-        parseDataWeather(cardsArrays[0][1], 'Imperial');
-        parseDataWeather(cardsArrays[1][1], 'Imperial');
-        parseDataWeather(cardsArrays[2][1], 'Imperial');
-        cardsArrays.shift();
-        cardsArrays.shift();
-        cardsArrays.shift();
+
+        setTimeout(() => {
+          parseDataWeather(cardsArrays[0][1], 'Imperial');
+        }, 500);
+
+        setTimeout(() => {
+          parseDataWeather(cardsArrays[1][1], 'Imperial');
+        }, 600);
+
+        setTimeout(() => {
+          parseDataWeather(cardsArrays[2][1], 'Imperial');
+          cardsArrays.shift();
+          cardsArrays.shift();
+          cardsArrays.shift();
+        }, 700);
       }
     }
   };
@@ -234,6 +266,7 @@ export const cardModule = (() => {
     parseDataWeather,
     changeWeatherMetric,
     isFahrenheit,
+    addSpinner,
   };
 })();
 
