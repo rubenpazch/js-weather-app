@@ -58,7 +58,7 @@ export const DomModule = (() => {
     return newInput;
   };
 
-  const addHtmlInputRadio = (classArray, type, id, name = '') => {
+  const addHtmlInputRadio = (classArray, type, id, name = '', checked) => {
     const newInput = document.createElement('input');
     for (let i = 0; i < classArray.length; i += 1) {
       newInput.classList.add(classArray[i]);
@@ -66,6 +66,7 @@ export const DomModule = (() => {
     newInput.id = id;
     newInput.setAttribute('type', type);
     newInput.setAttribute('name', name);
+    newInput.checked = checked;
     return newInput;
   };
 
@@ -102,7 +103,7 @@ export const DomModule = (() => {
     return element;
   };
 
-  const addHtmlH1 = (text, classArray = null) => {
+  const addHtmlH1 = (text, classArray = null, id = null) => {
     const element = document.createElement('h1');
     const content = document.createTextNode(text);
     element.appendChild(content);
@@ -110,6 +111,9 @@ export const DomModule = (() => {
       for (let i = 0; i < classArray.length; i += 1) {
         element.classList.add(classArray[i]);
       }
+    }
+    if (id !== null) {
+      element.id = id;
     }
     return element;
   };
@@ -157,6 +161,10 @@ export const DomModule = (() => {
     return newLabel;
   };
 
+  const changeToCelsius = (temp) => (temp - 32) / 1.8;
+
+  const changeToFahrenheit = (temp) => (temp * 1.8) + 32;
+
   return {
     addHtmlDiv,
     addHtmlNav,
@@ -173,6 +181,8 @@ export const DomModule = (() => {
     addHtmlH6,
     addHtmlLabel,
     addHtmlInputRadio,
+    changeToCelsius,
+    changeToFahrenheit,
   };
 })();
 

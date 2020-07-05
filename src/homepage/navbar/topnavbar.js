@@ -10,12 +10,10 @@ export const createNavBar = (() => {
 
     const divSwitch1 = DomModule.addHtmlDiv(['custom-control', 'custom-radio', 'custom-control-inline', 'ml-5']);
     const divSwitch2 = DomModule.addHtmlDiv(['custom-control', 'custom-radio', 'custom-control-inline']);
-    const inputFarent = DomModule.addHtmlInputRadio(['custom-control-input'], 'radio', 'customRadioInline1', 'customRadioInline1');
-    const inputCelsius = DomModule.addHtmlInputRadio(['custom-control-input'], 'radio', 'customRadioInline2', 'customRadioInline1');
+    const inputFarent = DomModule.addHtmlInputRadio(['custom-control-input'], 'radio', 'customRadioInline1', 'customRadioInline1', true);
+    const inputCelsius = DomModule.addHtmlInputRadio(['custom-control-input'], 'radio', 'customRadioInline2', 'customRadioInline1', false);
     const labelFarent = DomModule.addHtmlLabel(['custom-control-label'], 'idLabelFarent', 'customRadioInline1', 'Fº');
     const labelCelsius = DomModule.addHtmlLabel(['custom-control-label'], 'idLabelFarent', 'customRadioInline2', 'Cº');
-
-    //inputFarent.checked = true;
 
     divSwitch1.appendChild(inputFarent);
     divSwitch1.appendChild(labelFarent);

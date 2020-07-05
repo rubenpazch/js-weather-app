@@ -87,14 +87,20 @@ export const cardModule = (() => {
 
   const drawCard = (id, city, country, icon, description, temp, feelsLike, main, minTemp, maxTemp, pressure, humidity, visibility) => {
     const cardWrapper = DomModule.addHtmlDiv(['card-wrapper', 'mx-2'], `idCardWrapper-${id}`);
-    cardsArrays.push(`idCardWrapper-${id}`);
+    cardsArrays.push([`idCardWrapper-${id}`, city]);
+    console.log(cardsArrays);
     const divForm = DomModule.addHtmlDiv(['photo']);
     const divWeatherMain = DomModule.addHtmlDiv(['weather-main']);
     const spanWeatherStatus = DomModule.addHtmlSpan(main);
-    const divWeatherFeels = DomModule.addHtmlDiv(['weathe-feels']);
+    const divWeatherFeels = DomModule.addHtmlDiv(['weathe-feels'], 'idTempFeelsLike');
     const textFeelLike = `Feels like ${feelsLike} º`;
     const spanFeelsLike = DomModule.addHtmlSpan(textFeelLike);
-    const h1Temperature = DomModule.addHtmlH1(`${temp}º`);
+
+    const symbolDegre = DomModule.addHtmlSpan('º');
+    const currentTemp = `${temp} `;
+    const h1Temperature = DomModule.addHtmlH1(currentTemp, null, 'idTempTitleCard');
+    h1Temperature.appendChild(symbolDegre);
+
     const divWeatherIcon = DomModule.addHtmlDiv(['weather-icon']);
     const imgIconPath = `http://openweathermap.org/img/wn/${icon}@2x.png`;
     const imgGifPath = 'https://media3.giphy.com/media/l2JIhq7AR3J7Qq9Hy/giphy.gif?cid=ecf05e474ebbdba1ec6f2e9f54f8291b7a52073300ca456e&rid=giphy.gif';
@@ -118,7 +124,7 @@ export const cardModule = (() => {
   };
 
   const getWeatherCity = async (city, country) => {
-    const pathAPI = `http://api.openweathermap.org/data/2.5/weather?q=${city}&APPID=63ef30cbb14aca87dcfe79f9c0c8134a`;
+    const pathAPI = `http://api.openweathermap.org/data/2.5/weather?q=${city}&units=imperial&APPID=63ef30cbb14aca87dcfe79f9c0c8134a`;
     const response = await fetch(pathAPI, { mode: 'cors' });
     const weatherData = await response.json();
     return weatherData;
