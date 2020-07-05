@@ -167,6 +167,7 @@ export const cardModule = (() => {
   };
 
   const changeWeatherMetric = () => {
+    console.log(cardsArrays);
     const lenItems = cardsArrays.length;
     const wrapperCars = document.getElementById('idCardsWrapper');
     if (lenItems === 1) {
@@ -179,9 +180,44 @@ export const cardModule = (() => {
         parseDataWeather(cardsArrays[0][1], 'Imperial');
         cardsArrays.shift();
       }
-      // let city = cardsArrays[0][1];
-      // wrapperCars.childNodes[0].remove();
-      // parseDataWeather(city, 'Metric');
+    } else if (lenItems === 2) {
+      if (isFahrenheit() === false) {
+        wrapperCars.childNodes[0].remove();
+        wrapperCars.childNodes[0].remove();
+        parseDataWeather(cardsArrays[0][1], 'Metric');
+        parseDataWeather(cardsArrays[1][1], 'Metric');
+        cardsArrays.shift();
+        cardsArrays.shift();
+      } else {
+        wrapperCars.childNodes[0].remove();
+        wrapperCars.childNodes[0].remove();
+        parseDataWeather(cardsArrays[0][1], 'Imperial');
+        parseDataWeather(cardsArrays[1][1], 'Imperial');
+        cardsArrays.shift();
+        cardsArrays.shift();
+      }
+    } else if (lenItems === 3) {
+      if (isFahrenheit() === false) {
+        wrapperCars.childNodes[0].remove();
+        wrapperCars.childNodes[0].remove();
+        wrapperCars.childNodes[0].remove();
+        parseDataWeather(cardsArrays[0][1], 'Metric');
+        parseDataWeather(cardsArrays[1][1], 'Metric');
+        parseDataWeather(cardsArrays[2][1], 'Metric');
+        cardsArrays.shift();
+        cardsArrays.shift();
+        cardsArrays.shift();
+      } else {
+        wrapperCars.childNodes[0].remove();
+        wrapperCars.childNodes[0].remove();
+        wrapperCars.childNodes[0].remove();
+        parseDataWeather(cardsArrays[0][1], 'Imperial');
+        parseDataWeather(cardsArrays[1][1], 'Imperial');
+        parseDataWeather(cardsArrays[2][1], 'Imperial');
+        cardsArrays.shift();
+        cardsArrays.shift();
+        cardsArrays.shift();
+      }
     }
   };
 
