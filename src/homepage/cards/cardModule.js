@@ -1,5 +1,4 @@
 import { DomModule } from '../../helpers/CreateDomElements';
-import { cardFactory } from './cardFactory';
 
 export const cardModule = (() => {
   let counter = 0;
@@ -88,7 +87,6 @@ export const cardModule = (() => {
   const drawCard = (id, city, country, icon, description, temp, feelsLike, main, minTemp, maxTemp, pressure, humidity, visibility) => {
     const cardWrapper = DomModule.addHtmlDiv(['card-wrapper', 'mx-2'], `idCardWrapper-${id}`);
     cardsArrays.push([`idCardWrapper-${id}`, city]);
-    console.log(cardsArrays);
     const divForm = DomModule.addHtmlDiv(['photo']);
     const divWeatherMain = DomModule.addHtmlDiv(['weather-main']);
     const spanWeatherStatus = DomModule.addHtmlSpan(main);
@@ -123,8 +121,8 @@ export const cardModule = (() => {
     return cardWrapper;
   };
 
-  const getWeatherCity = async (city, country) => {
-    const pathAPI = `http://api.openweathermap.org/data/2.5/weather?q=${city}&units=imperial&APPID=63ef30cbb14aca87dcfe79f9c0c8134a`;
+  const getWeatherCity = async (city, metric) => {
+    const pathAPI = `http://api.openweathermap.org/data/2.5/weather?q=${city}&units=${metric}&APPID=63ef30cbb14aca87dcfe79f9c0c8134a`;
     const response = await fetch(pathAPI, { mode: 'cors' });
     const weatherData = await response.json();
     return weatherData;
@@ -140,8 +138,8 @@ export const cardModule = (() => {
     return wrapperCars;
   };
 
-  const parseDataWeather = (city, country) => {
-    getWeatherCity(city, country).then(v => {
+  const parseDataWeather = (city, metric) => {
+    getWeatherCity(city, metric).then(v => {
       counter += 1;
       const card = drawCard(counter,
         v.name,
@@ -163,6 +161,30 @@ export const cardModule = (() => {
     });
   };
 
+  const isFahrenheit = () => {
+    const radioButtonFahrenheit = document.getElementById('customRadioInline1');
+    return radioButtonFahrenheit.checked;
+  };
+
+  const changeWeatherMetric = () => {
+    const lenItems = cardsArrays.length;
+    const wrapperCars = document.getElementById('idCardsWrapper');
+    if (lenItems === 1) {
+      if (isFahrenheit() === false) {
+        wrapperCars.childNodes[0].remove();
+        parseDataWeather(cardsArrays[0][1], 'Metric');
+        cardsArrays.shift();
+      } else {
+        wrapperCars.childNodes[0].remove();
+        parseDataWeather(cardsArrays[0][1], 'Imperial');
+        cardsArrays.shift();
+      }
+      // let city = cardsArrays[0][1];
+      // wrapperCars.childNodes[0].remove();
+      // parseDataWeather(city, 'Metric');
+    }
+  };
+
   return {
     drawCardContainer,
     drawCard,
@@ -174,6 +196,8 @@ export const cardModule = (() => {
     liElement,
     getWeatherCity,
     parseDataWeather,
+    changeWeatherMetric,
+    isFahrenheit,
   };
 })();
 

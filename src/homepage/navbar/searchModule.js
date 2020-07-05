@@ -7,7 +7,7 @@ export const searchModule = (() => {
 
     searchInput.addEventListener('keyup', (event) => {
       if (event.keyCode === 13) {
-        cardModule.parseDataWeather(searchInput.value, 'PE');
+        cardModule.parseDataWeather(searchInput.value, 'Imperial');
         const inputSearch = document.getElementById('idInputSerach');
         inputSearch.value = '';
         inputSearch.focus();
@@ -15,7 +15,7 @@ export const searchModule = (() => {
     });
 
     searchBotton.addEventListener('click', () => {
-      cardModule.parseDataWeather(searchInput.value, 'PE');
+      cardModule.parseDataWeather(searchInput.value, 'Imperial');
       const inputSearch = document.getElementById('idInputSerach');
       inputSearch.value = '';
       inputSearch.focus();

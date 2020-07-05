@@ -1,6 +1,7 @@
 import { createNavBar } from './navbar/topnavbar';
 import { searchModule } from './navbar/searchModule';
 import { DomModule } from '../helpers/CreateDomElements';
+import { cardModule } from './cards/cardModule';
 
 export const configurePage = (() => {
   const configureHome = () => {
@@ -19,19 +20,12 @@ export const configurePage = (() => {
 
     const farent = document.getElementById('customRadioInline1');
     farent.addEventListener('click', () => {
-      const currentTemp = document.getElementById('idTempTitleCard');
-      const onlyTemp = currentTemp.textContent.split(' ')[0];
-      console.log(parseInt(onlyTemp, 10));
-      console.log(DomModule.changeToCelsius(parseInt(onlyTemp, 10)));
-      console.log('farent');
+      cardModule.changeWeatherMetric();
     });
+
     const celsius = document.getElementById('customRadioInline2');
     celsius.addEventListener('click', () => {
-      const currentTemp = document.getElementById('idTempTitleCard');
-      const onlyTemp = currentTemp.textContent.split(' ')[0];
-      console.log(parseInt(onlyTemp, 10));
-      console.log(DomModule.changeToCelsius(parseInt(onlyTemp, 10)));
-      console.log('celsius');
+      cardModule.changeWeatherMetric();
     });
   };
   return {
