@@ -14,6 +14,7 @@ export const configurePage = (() => {
       'wrapper-cards',
       'pt-4'];
     const wrapperCards = DomModule.addHtmlDiv(arrayClass, 'idCardsWrapper');
+    homeContainer.appendChild(cardModule.divAlert('city not found, try again with another location'));
     homeContainer.appendChild(wrapperCards);
 
     searchModule.searchWeatherCity();

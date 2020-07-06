@@ -34,20 +34,24 @@
   right: 0.5rem;
   top: 5rem;
   text-align: center;
-  color: #fff;
+  color: #000;
+  text-shadow: 0 1px 20px black;
   font-weight: 900;
   text-transform: uppercase;
+  font-family: Arial, Helvetica, sans-serif;
 }
 
 .photo h2 {
   position: absolute;
   left: 0;
   bottom: 0;
-  color: #fff;
+  color: #000;
+  text-shadow: 0 1px 20px black;
+  font-family: Arial, Helvetica, sans-serif;
   width: 70%;
   padding: 0 0 10px 10px;
   margin: 0;
-  font-weight: 100;
+  font-weight: 900;
   z-index: 999;
   font-size: 1.5rem;
 }
@@ -56,7 +60,10 @@
   position: absolute;
   right: 0;
   bottom: 1.5rem;
-  color: #fff;
+  color: #000;
+  text-shadow: 0 1px 20px black;
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: 900;
   width: 25%;
   padding: 0 0 0 0;
   font-size: 3rem;
@@ -74,7 +81,10 @@
   right: 0;
   font-size: 1.2rem;
   width: 10rem;
-  color: #fff;
+  color: #000;
+  text-shadow: 0 1px 20px black;
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: 900;
   text-align: center;
   line-height: 1.7rem;
 }
@@ -83,6 +93,9 @@
   position: absolute;
   bottom: 0.5rem;
   right: 3rem;
-  color: #fff;
+  color: #000;
+  text-shadow: 0 1px 20px black;
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: 900;
   text-align: center;
 }

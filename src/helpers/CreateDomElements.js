@@ -84,7 +84,6 @@ export const DomModule = (() => {
   const addHtmlImg = (classArray, srcPath) => {
     const img = new Image();
     img.src = srcPath;
-
     for (let i = 0; i < classArray.length; i += 1) {
       img.classList.add(classArray[i]);
     }

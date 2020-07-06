@@ -14,6 +14,25 @@ export const cardModule = (() => {
     return html;
   };
 
+  const divAlert = (message) => {
+    const divAler = DomModule.addHtmlDiv(['alert', 'alert-danger', 'm-0'], 'idAlertDiv');
+    divAler.style.display = 'none';
+    divAler.setAttribute('role', 'alert');
+    divAler.innerText = message;
+    return divAler;
+  };
+
+  const showAlert = (message) => {
+    const element = document.getElementById('idAlertDiv');
+    element.innerHTML = message;
+    element.style.display = 'block';
+  };
+
+  const hideAlert = () => {
+    const element = document.getElementById('idAlertDiv');
+    element.style.display = 'none';
+  };
+
   const icons = (option) => {
     let icon = '';
     switch (option) {
@@ -94,7 +113,7 @@ export const cardModule = (() => {
   };
 
   // eslint-disable-next-line max-len
-  const drawCard = (id, city, country, icon, description, temp, feelsLike, main, minTemp, maxTemp, pressure, humidity, visibility) => {
+  const drawCard = (id, city, country, icon, description, temp, feelsLike, main, minTemp, maxTemp, pressure, humidity, visibility, urlGif) => {
     const cardWrapper = DomModule.addHtmlDiv(['card-wrapper', 'mx-2'], `idCardWrapper-${id}`);
     cardsArrays.push([`idCardWrapper-${id}`, city]);
     const divForm = DomModule.addHtmlDiv(['photo']);
@@ -111,7 +130,7 @@ export const cardModule = (() => {
 
     const divWeatherIcon = DomModule.addHtmlDiv(['weather-icon']);
     const imgIconPath = `http://openweathermap.org/img/wn/${icon}@2x.png`;
-    const imgGifPath = 'https://media3.giphy.com/media/l2JIhq7AR3J7Qq9Hy/giphy.gif?cid=ecf05e474ebbdba1ec6f2e9f54f8291b7a52073300ca456e&rid=giphy.gif';
+    const imgGifPath = urlGif;
     const weatherDescription = DomModule.addHtmlp(description);
 
     divWeatherMain.appendChild(spanWeatherStatus);
@@ -119,7 +138,11 @@ export const cardModule = (() => {
     divWeatherIcon.appendChild(drawCardImage(imgIconPath));
     divWeatherIcon.appendChild(weatherDescription);
 
-    divForm.appendChild(drawCardImage(imgGifPath));
+    const DrawGifImage = drawCardImage(imgGifPath);
+    DrawGifImage.style.height = '17rem';
+    DrawGifImage.style.opacity = '0.5';
+
+    divForm.appendChild(DrawGifImage);
     divForm.appendChild(drawLocationText(`${city}, ${country}`));
     divForm.appendChild(divWeatherMain);
     divForm.appendChild(divWeatherFeels);
@@ -134,8 +157,15 @@ export const cardModule = (() => {
   const getWeatherCity = async (city, metric) => {
     const pathAPI = `http://api.openweathermap.org/data/2.5/weather?q=${city}&units=${metric}&APPID=63ef30cbb14aca87dcfe79f9c0c8134a`;
     const response = await fetch(pathAPI, { mode: 'cors' });
-    const weatherData = await response.json();
-    return weatherData;
+    const weatheData = await response.json();
+    return weatheData;
+  };
+
+  const getGifImage = async (category) => {
+    const pathAPI = `https://api.giphy.com/v1/gifs/translate?api_key=Yp3P2I2fQedRFhBfFEiwKRkoH7XG3ckn&s=${category}`;
+    const response = await fetch(pathAPI, { mode: 'cors' });
+    const gifList = await response.json();
+    return gifList.data.images.downsized_medium.url;
   };
 
   const drawCardContainer = () => {
@@ -148,26 +178,37 @@ export const cardModule = (() => {
   };
 
   const parseDataWeather = (city, metric) => {
-    getWeatherCity(city, metric).then(v => {
-      counter += 1;
-      const card = drawCard(counter,
-        v.name,
-        v.sys.country,
-        v.weather[0].icon,
-        v.weather[0].description,
-        Math.round(v.main.temp),
-        Math.round(v.main.feels_like),
-        v.weather[0].main,
-        v.main.temp_min,
-        v.main.temp_max,
-        v.main.pressure,
-        v.main.humidity,
-        v.visibility);
-      const wrapper = drawCardContainer();
-      wrapper.appendChild(card);
-      const homeContainer = document.querySelector('#main-container');
-      homeContainer.appendChild(wrapper);
-    });
+    let urlGif = '';
+
+    getGifImage(city).then(x => {
+      urlGif = x;
+    }).catch(reason => showAlert(`We did not found a picture for this city : ${reason}`));
+
+    getWeatherCity(city, metric)
+      .then(v => {
+        counter += 1;
+        const card = drawCard(counter,
+          v.name,
+          v.sys.country,
+          v.weather[0].icon,
+          v.weather[0].description,
+          Math.round(v.main.temp),
+          Math.round(v.main.feels_like),
+          v.weather[0].main,
+          v.main.temp_min,
+          v.main.temp_max,
+          v.main.pressure,
+          v.main.humidity,
+          v.visibility,
+          urlGif);
+
+        const wrapper = drawCardContainer();
+        wrapper.appendChild(card);
+        const homeContainer = document.querySelector('#main-container');
+        homeContainer.appendChild(wrapper);
+      })
+      // eslint-disable-next-line no-unused-vars
+      .catch(reason => showAlert(`city not found, try again with another location : ${reason}`));
   };
 
   const isFahrenheit = () => {
@@ -268,6 +309,10 @@ export const cardModule = (() => {
     changeWeatherMetric,
     isFahrenheit,
     addSpinner,
+    getGifImage,
+    divAlert,
+    showAlert,
+    hideAlert,
   };
 })();
 

@@ -6,6 +6,7 @@ export const searchModule = (() => {
     const searchBotton = document.getElementById('idButtonSearch');
 
     searchInput.addEventListener('keyup', (event) => {
+      cardModule.hideAlert();
       if (event.keyCode === 13) {
         if (cardModule.isFahrenheit() === true) {
           cardModule.parseDataWeather(searchInput.value, 'Imperial');
@@ -19,6 +20,7 @@ export const searchModule = (() => {
     });
 
     searchBotton.addEventListener('click', () => {
+      cardModule.hideAlert();
       if (cardModule.isFahrenheit() === true) {
         cardModule.parseDataWeather(searchInput.value, 'Imperial');
       } else {
