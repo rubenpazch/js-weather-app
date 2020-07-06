@@ -1,6 +1,6 @@
-# Javascript To-do List
+# Javascript Weather App
 
-> This project is about building a static website for a restaurant using pure javascript, Webpack, modules, building the entire site using just Javascript, and get more practice on DOM manipulation by dynamically rendering a simple restaurant homepage.
+This project is about building a web application to show a weather forecast using weather API from external services like https://openweathermap.org/ and https://giphy.com/, you should be able to search for a specific location and toggle displaying the data in Fahrenheit or Celsius.
 
 ![screenshot](./app_screenshot.png)
 
@@ -13,7 +13,7 @@
 
 ## Live Demo
 
-[Live Demo Link](https://raw.githack.com/MiguelDP4/js-todo-list/feature/dist/index.html)
+[Live Demo Link](http://weather-app.cuscosolutions.com/)
 
 
 ## Getting Started
@@ -23,7 +23,7 @@
 Do you want to clone this project please use this command on you terminal
 
 ```
-git clone https://github.com/MiguelDP4/js-todo-list.git
+git clone git@github.com:rubenpazch/js-weather-app.git
 ```
 
 webpack is used to compile JavaScript modules. Once installed, you can interface with webpack either from its CLI or API. If you're still new to webpack, please read through the core concepts and this comparison to learn why you might use it over the other tools that are out in the community.
@@ -102,11 +102,6 @@ npm run build
 - Linkedin: [rubenpch](https://www.linkedin.com/in/rubenpch/)
 - Twitter: [chuspepaz](https://twitter.com/ChuspePaz)
 
-👤 **Miguel Angel Dubois**
-
-- Github: [@MiguelDP4](https://github.com/MiguelDP4)
-- Twitter: [@Mike_DP4](https://twitter.com/Mike_DP4)
-- LinkedIn [Miguel Dubois](https://www.linkedin.com/in/miguel-angel-dubois)
 
 ## 🤝 Contributing
 
