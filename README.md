@@ -185,7 +185,7 @@ To deploy this project and copy the info from the dist folder to your server.
 
 ## 🤝 Contributing
 
-Contributions, issues and feature requests are welcome!
+This project was created for educational purposes as part of the Microverse web development curriculum; contributing is not accepted.
 
 Feel free to check the [issues page](issues/).
 
